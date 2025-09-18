@@ -329,6 +329,8 @@ public class UmengPushSdkPlugin implements FlutterPlugin, MethodCallHandler {
             }
         };
         api.setNotificationClickHandler(clickHandler);
+        // https://developer.umeng.com/docs/67966/detail/2949225
+        api.setPackageListenerEnable(false);
         api.register(new UPushRegisterCallback() {
             @Override
             public void onSuccess(final String deviceToken) {
