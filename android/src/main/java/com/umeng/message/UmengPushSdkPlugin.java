@@ -92,6 +92,14 @@ public class UmengPushSdkPlugin implements FlutterPlugin, MethodCallHandler {
         mChannel = null;
     }
 
+//    public static void registerWith(Registrar registrar) {
+//        MethodChannel channel = new MethodChannel(registrar.messenger(), "u-push");
+//        UmengPushSdkPlugin plugin = new UmengPushSdkPlugin();
+//        plugin.mContext = registrar.context();
+//        plugin.mChannel = channel;
+//        channel.setMethodCallHandler(plugin);
+//    }
+
     @Override
     public void onMethodCall(MethodCall call, Result result) {
         try {
@@ -263,7 +271,7 @@ public class UmengPushSdkPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     private void register(final Result result) {
-        UMConfigure.init(mContext, null, null, UMConfigure.DEVICE_TYPE_PHONE, null);
+        UMConfigure.init(mContext, null, null, UMConfigure.DEVICE_TYPE_PHONE,null);
 
         PushAgent api = PushAgent.getInstance(mContext);
         api.setDisplayNotificationNumber(0);
@@ -349,8 +357,7 @@ public class UmengPushSdkPlugin implements FlutterPlugin, MethodCallHandler {
                 });
 
                 try {
-                    ApplicationInfo appInfo = mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(),
-                            PackageManager.GET_META_DATA);
+                    ApplicationInfo appInfo = mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(), PackageManager.GET_META_DATA);
 
                     try {
                         String xmAppId = appInfo.metaData.getString(META_DATA.XM_APP_ID).replace("appid=", "");
@@ -463,10 +470,10 @@ public class UmengPushSdkPlugin implements FlutterPlugin, MethodCallHandler {
         public static final String OP_APP_SECRET = "org.android.agoo.oppo.app_secret";
     }
 
-    // 支持华为、荣耀、vivo、OPPO（需申请）等
+    //支持华为、荣耀、vivo、OPPO（需申请）等
     private void setBadge(int number, Result result) {
         PushAgent.getInstance(mContext).setBadgeNum(number);
         executeOnMain(result, true);
     }
-    // ----- PUSH END -----
+    //-----  PUSH END -----
 }
